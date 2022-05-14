@@ -32,3 +32,8 @@ The target audience for this project are the researchers trying to understand or
 - A markdown or a text file which lists dataset sources, the process of making those maps and difficulties with working real data
 
 ### Project Format - WIP
+For this project, our group wanted to include two pages that allow users to interact and explore the dataset. 
+
+The first one would be in a generic interactive choropleth map that allows the users to adjust the year of data represented by pulling the time bar. The base map would be in a light monochrome style. And each data represented would be in a translucent layer. (so that they can be overlayed?) We will be using vector layers to compile the thematic layers. And there will be four layers: precipitation, minimum temperature, maximum temperature, and the average temperature calculated from the minimum and maximum temperature. The data obtained from our source has information for each month in the year, so we would also aggregate it into the year. 
+
+The second page would allow the user to compare specific states, years, months, and data. Users would have several dropdown boxes to adjust the comparing maps that they wanted on each side of the screen.
