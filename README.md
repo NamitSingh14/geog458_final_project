@@ -1,9 +1,12 @@
 # Climate Change in the USA over the last 100 years
 
-### Project Idea - WIP
+### Project Idea
 The project idea is to visualize minimum and maximum temperatures across the counties in the United States, along with the precipitation. Since the idea is to showcase climate change, the project will have the temperature and precipitation readings from different years.
 
-### Significance and Broader Impacts - WIP
+### Significance and Broader Impacts
+Understanding climate change and the patterns in temperature/precipitation changes can help us keep the ecosystem in a healthy condition. If we are ignorant towards climate change, it can cause natural disasters, human health issues and damage both man-made and natural systems.
+
+This project should make it easier for people to visualize climate change and take appropriate action.
 
 ### Data Source
 We will be using data from the National Centers for Environmental Information. The particular data that interested us is the temerature and perciptaion and will be obtain from [NCEI's data repository](https://www.ncei.noaa.gov/pub/data/cirs/climgrid/). 
@@ -26,14 +29,22 @@ The provided shape files contain the county `FIPS` code and the column is named 
 ### Target Audience
 The target audience for this project are the researchers trying to understand or visualize climate change in the USA over the last 100 years. Its also made for the other students in the course as it might be relevant to them as well.
 
-### Multimedia - WIP
+### Multimedia
 - An interactive map is definitely required where we can show temperatures and precipitations over a given time period
 
 - A markdown or a text file which lists dataset sources, the process of making those maps and difficulties with working real data
 
-### Project Format - WIP
-For this project, our group wanted to include two pages that allow users to interact and explore the dataset. 
+### Project Format
+For this project, our group wanted to include two pages that allow users to interact and explore the dataset. Both maps will use the Pseudo Mercator projection.
 
-The first one would be in a generic interactive choropleth map that allows the users to adjust the year of data represented by pulling the time bar. The base map would be in a light monochrome style. And each data represented would be in a translucent layer. (so that they can be overlayed?) We will be using vector layers to compile the thematic layers. And there will be four layers: precipitation, minimum temperature, maximum temperature, and the average temperature calculated from the minimum and maximum temperature. The data obtained from our source has information for each month in the year, so we would also aggregate it into the year. 
+The first map is a generic interactive choropleth map:
+ - It will have a time slider to see data from different years
+ - Base map will be light monochrome
+ - There will be total of 4 layers:
+    - Maximum Temperature
+    - Minimum Temperature
+    - Average Temperature
+    - Precipitation
+- This will be centered at 39.8283° N, 98.5795° W
 
-The second page would allow the user to compare specific states, years, months, and data. Users would have several dropdown boxes to adjust the comparing maps that they wanted on each side of the screen.
+The second map will be more granular. It will let users compare specific states, years, months and type of data. The options for which state to compare will be present in a dropdown menu. Since it is a comparision map, it will be centered at the center of the given state. 
