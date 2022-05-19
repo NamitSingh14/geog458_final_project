@@ -131,7 +131,8 @@
         map.on('click', 'states-layer', (e) => {
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
-                .setHTML(e.features[0].properties[0].state)
+                .setHTML("State: " + e.features[0].properties.STATE + "\n" +
+                "County: " + e.features[0].properties.NAME)
                 .addTo(map);
         });
 
