@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>COVID-19 Cases in the USA</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+
+      /* the layout of the legend panel */
+      #legend {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 110px;
+        background: #fff;
+        margin-right: 20px;
+        margin-bottom: 40px;
+        padding: 10px 20px 10px 10px;
+        border-radius: 3px;
+        text-align: center;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      /* each line for a break */
+      .break {
+        position: relative;
+        margin: 0px;
+        padding: 0px;
+      }
+
+      /* basic style for a dot/circle */
+      .dot {
+        display: inline-block;
+        margin-top: 5px;
+        border-radius: 50%;
+        opacity: 0.6;
+      }
+
+      /* the label for the dot */
+      .dot-label {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-style: italic;
+      }
+
+      /* the text color of a hyper link */
+      a {
+        color: black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <div id="legend"></div>
+    <div id="title">COVID-19 Cases in the USA</div>
+    <div id="subtitle">December 31, 2020</div>
+    <script>
+      mapboxgl.accessToken =
+        "pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw";
+      let map = new mapboxgl.Map({
+        container: "map", // container ID
+        style: "mapbox://styles/mapbox/dark-v10",
+        zoom: 4.5, // starting zoom
+        center: [-100, 40], // starting center
+      });
+
+      // map.setProjection("albers");
+
+      const grades = [100, 500, 1000, 5000, 10000, 20000, 25000, 30000],
+        colors = [
+          "rgb(255,255,168)",
+          "rgb(255,233,137)",
+          "rgb(254,214,108)",
+          "rgb(254,179,79)",
+          "rgb(253,146,68)",
+          "rgb(252,89,56)",
+          "rgb(232,50,52)",
+          "rgb(255,80,118)",
+        ],
+        radii = [1, 4, 7, 10, 13, 16, 19, 22];
+
+      //load data to the map as new layers.
+      //map.on('load', function loadingData() {
+        map.on('load', () => {
+        // Add a source for the state polygons.
+        map.addSource('states', {
+            type: 'geojson',
+            data: 'assets/json/simplified_conus_counties_polygons.json'
+        });
+
+        // Add a layer showing the state polygons.
+        map.addLayer({
+            id: 'states-layer',
+            type: 'fill',
+            source: 'states',
+            paint: {
+                'fill-color': 'rgba(200, 100, 240, 0.4)',
+                'fill-outline-color': 'rgba(200, 100, 240, 1)'
+            }
+        });
+
+        // When a click event occurs on a feature in the states layer,
+        // open a popup at the location of the click, with description
+        // HTML from the click event's properties.
+        map.on('click', 'states-layer', (e) => {
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(e.features[0].properties[0].state)
+                .addTo(map);
+        });
+
+        // Change the cursor to a pointer when
+        // the mouse is over the states layer.
+        map.on('mouseenter', 'states-layer', () => {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change the cursor back to a pointer
+        // when it leaves the states layer.
+        map.on('mouseleave', 'states-layer', () => {
+            map.getCanvas().style.cursor = '';
+        });
+    });
+
+      // add the data source
+      const source =
+        '<p style="text-align: right; font-size:10pt">Source: <a href="https://github.com/nytimes/covid-19-data/blob/43d32dde2f87bd4dafbb7d23f5d9e878124018b8/live/us-counties.csv">New York Times</a></p>';
+      // combine all the html codes.
+      legend.innerHTML = labels.join("") + source;
+    </script>
+  </body>
+</html>
