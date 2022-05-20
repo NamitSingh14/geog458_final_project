@@ -90,64 +90,87 @@
         center: [-100, 40], // starting center
       });
 
-      // map.setProjection("albers");
+      const years = [
+        2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011,
+        2012, 2013, 2014, 2015,
+      ];
 
-      const grades = [100, 500, 1000, 5000, 10000, 20000, 25000, 30000],
-        colors = [
-          "rgb(255,255,168)",
-          "rgb(255,233,137)",
-          "rgb(254,214,108)",
-          "rgb(254,179,79)",
-          "rgb(253,146,68)",
-          "rgb(252,89,56)",
-          "rgb(232,50,52)",
-          "rgb(255,80,118)",
-        ],
-        radii = [1, 4, 7, 10, 13, 16, 19, 22];
+      function filterBy(year) {
+        const filters = ["==", "year", year];
+        map.setFilter("earthquake-circles", filters);
+        map.setFilter("earthquake-labels", filters);
+
+        // Set the label to the month
+        document.getElementById("year").textContent = years[year];
+      }
 
       //load data to the map as new layers.
       //map.on('load', function loadingData() {
-        map.on('load', () => {
-        // Add a source for the state polygons.
-        map.addSource('states', {
-            type: 'geojson',
-            data: 'assets/json/simplified_conus_counties_polygons.json'
+      map.on("load", () => {
+        // Add a source for the county polygons.
+        map.addSource("states", {
+          type: "geojson",
+          data: "assets/json/avg_temp_poly_2000_15.geojson",
         });
 
-        // Add a layer showing the state polygons.
         map.addLayer({
-            id: 'states-layer',
-            type: 'fill',
-            source: 'states',
-            paint: {
-                'fill-color': 'rgba(200, 100, 240, 0.4)',
-                'fill-outline-color': 'rgba(200, 100, 240, 1)'
-            }
+          id: "rates-point",
+          type: "fill",
+          source: "states",
+          minzoom: 4.5,
+          paint: {
+            "fill-color": [
+              "step",
+              ["get", "january"],
+              "#FFEDA0",
+              10,
+              "#FED976",
+              20,
+              "#FEB24C",
+              50,
+              "#FD8D3C",
+              100,
+              "#FC4E2A",
+              200,
+              "#E31A1C",
+              500,
+              "#BD0026",
+              1000,
+              "#800026",
+            ],
+            "fill-outline-color": "#BBBBBB",
+            "fill-opacity": 0.7,
+          },
         });
 
         // When a click event occurs on a feature in the states layer,
         // open a popup at the location of the click, with description
         // HTML from the click event's properties.
-        map.on('click', 'states-layer', (e) => {
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML("State: " + e.features[0].properties.STATE + "\n" +
-                "County: " + e.features[0].properties.NAME)
-                .addTo(map);
+        map.on("click", "states-layer", (e) => {
+          new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(
+              "State: " +
+                e.features[0].properties.STATE +
+                "\n" +
+                "County: " +
+                e.features[0].properties.NAME
+            )
+            .addTo(map);
         });
 
         // Change the cursor to a pointer when
         // the mouse is over the states layer.
-        map.on('mouseenter', 'states-layer', () => {
-            map.getCanvas().style.cursor = 'pointer';
+        map.on("mouseenter", "states-layer", () => {
+          map.getCanvas().style.cursor = "pointer";
         });
 
         // Change the cursor back to a pointer
         // when it leaves the states layer.
-        map.on('mouseleave', 'states-layer', () => {
-            map.getCanvas().style.cursor = '';
+        map.on("mouseleave", "states-layer", () => {
+          map.getCanvas().style.cursor = "";
         });
-    });
+      });
 
       // add the data source
       const source =
