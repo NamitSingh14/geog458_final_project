@@ -121,10 +121,10 @@
     <div class="map-overlay top">
       <div class="map-overlay-inner">
         <h2>Significant earthquakes in 2015</h2>
-        <label id="year"></label>
-        <input class="slider" id="slider year" type="range" min="0" max="15" step="1" value="0" />
-        <label id="month"></label>
-        <input class="slider" id="slider month" type="range" min="0" max="11" step="1" value="0" />
+        <label id="year">2000</label>
+        <input class="slider" id="slider year" type="range" min="0" max="15" step="1" value="0" onchange="updateSliderYear(this.value)"/>
+        <label id="month">january</label>
+        <input class="slider" id="slider month" type="range" min="0" max="11" step="1" value="0" onchange="updateSliderMonth(this.value)"/>
       </div>
       <div class="map-overlay-inner">
         <div id="legend" class="legend">
@@ -148,8 +148,8 @@
       });
 
       const years = [
-        '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011',
-        '2012', '2013', '2014', '2015'
+        2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011,
+        2012, 2013, 2014, 2015
       ];
 
       const months = [
@@ -158,22 +158,18 @@
 
       let temp = "january";
 
-      function filterBy(year) {
-        const filters = ["==", "year", year];
+
+      function updateSliderYear(slideAmount) {
+        var sliderDiv = document.getElementById("year");
+        const filters = ["==", "year", years[slideAmount]];
         map.setFilter("avg-temp-layer", filters);
-
-        // Set the label to the month
-        document.getElementById("year").textContent = years[year].toString();
+        sliderDiv.innerHTML = years[slideAmount];
       }
-
-      function filterByMonth(month) {
-        const filters = ["==", "month", month];
-        temp =  months[month];
-        console.log(temp);
-        // Set the label to the month
-        document.getElementById("month").textContent = months[month].toString();
+      function updateSliderMonth(slideAmount) {
+        var sliderDiv = document.getElementById("month");
+        sliderDiv.innerHTML = months[slideAmount];
+        temp = months[slideAmount];
       }
-
 
       //load data to the map as new layers.
       //map.on('load', function loadingData() {
@@ -192,7 +188,7 @@
           paint: {
             "fill-color": [
               "step",
-              ["get", "january"],
+              ["get", temp],
               "#FFEDA0",
               10,
               "#FED976",
@@ -243,19 +239,6 @@
         });
       });
 
-      filterBy('5');
-      filterByMonth('5');
-
-      document.getElementById("slider year").addEventListener("input", (e) => {
-        const year = e.target.value;
-        console.log(year);
-        filterBy(year);
-      });
-      document.getElementById("slider month").addEventListener("input", (e) => {
-        const month = e.target.value;
-        console.log(month);
-        filterByMonth(month);
-      });
 
     </script>
   </body>
