@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>COVID-19 Cases in the USA</title>
+    <title>Weather information in the contiguous USA</title>
     <meta
       name="viewport"
       content="initial-scale=1,maximum-scale=1,user-scalable=no"
@@ -16,16 +16,11 @@
       rel="stylesheet"
     />
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
-    <link rel="stylesheet" href="css/map1.css">
+    <link rel="stylesheet" href="css/map1.css" />
   </head>
 
   <body>
     <div id="map"></div>
-    <div class="map-overlay" id="features">
-      <h2>US population density</h2>
-      <div id="pd"><p>Hover over a state!</p></div>
-    </div>
-    <div class="map-overlay" id="legend"></div>
 
     <div class="map-overlay top">
       <div class="map-overlay-inner">
@@ -54,9 +49,14 @@
         />
       </div>
     </div>
+    <div id="features">
+      <h2>Climate Division Details</h2>
+      <div id="pd"><p>Hover over a division!</p></div>
+    </div>
+    <div id="legend">Legend</div>
 
-    <div id="title">COVID-19 Cases in the USA</div>
-    <div id="subtitle">December 31, 2020</div>
+    <div id="title">Weather information in the contiguous USA</div>
+    <div id="subtitle">May 21, 2022</div>
     <script>
       mapboxgl.accessToken =
         "pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw";
@@ -141,39 +141,15 @@
           },
         });
 
-        // When a click event occurs on a feature in the states layer,
-        // open a popup at the location of the click, with description
-        // HTML from the click event's properties.
-        map.on("click", "avg-temp-layer", (e) => {
-          new mapboxgl.Popup()
-            .setLngLat(e.lngLat)
-            .setHTML(
-              "State: " +
-                e.features[0].properties.state +
-                " |\n" +
-                "Climate Division: " +
-                e.features[0].properties.name +
-                " |\n" +
-                "Temperature: " +
-                e.features[0].properties[temp] +
-                "F" +
-                "/" +
-                ((e.features[0].properties[temp] - 32) / 1.8).toFixed(2) +
-                "C"
-            )
-            .addTo(map);
-        });
-
-        // Change the cursor to a pointer when
-        // the mouse is over the states layer.
-        map.on("mouseenter", "states-layer", () => {
-          map.getCanvas().style.cursor = "pointer";
-        });
-
-        // Change the cursor back to a pointer
-        // when it leaves the states layer.
-        map.on("mouseleave", "states-layer", () => {
-          map.getCanvas().style.cursor = "";
+        map.on("mousemove", (event) => {
+          const states = map.queryRenderedFeatures(event.point, {
+            layers: ["avg-temp-layer"],
+          });
+          document.getElementById("pd").innerHTML = states.length
+            ? `<h3>State: ${states[0].properties.state}</h3>
+            <p><strong><em>Division: ${states[0].properties.name}</strong></em></p>
+            Temperature: ${states[0].properties[temp]}F / ${((states[0].properties[temp] - 32) / 1.8).toFixed(2)}C`
+            : `<p>Hover over a division!</p>`;
         });
       });
 
