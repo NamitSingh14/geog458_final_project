@@ -1,4 +1,4 @@
-# Climate Change in the USA over the last 100 years
+# Climate Change in the USA between 2000 and 2015
 
 ### Project Idea
 The project idea is to visualize minimum and maximum temperatures across the counties in the United States, along with the precipitation. Since the idea is to showcase climate change, the project will have the temperature and precipitation readings from different years.
@@ -11,7 +11,7 @@ This project should make it easier for people to visualize climate change and ta
 ### Data Source
 We will be using data from the National Centers for Environmental Information. The particular data that interested us is the temperature and precipitation and will be obtained from [NCEI's data repository](https://www.ncei.noaa.gov/pub/data/cirs/climgrid/). In addition, the main shapefiles that we will be plotting are available [here](https://www.ncei.noaa.gov/pub/data/cirs/climdiv/). The data will be from the past two years. And here is an example of one of the datasets included which is Alaska’s average temperature in 2021 (2021.tave.alaska.pnt). It is organized by Latitude, Longitude, and value from each Month.
 
-### Data Preprocessing
+### Initial Data Preprocessing
 All the data preprocessing was done in `MS Excel`. This could be done in `Python` using its `Pandas` module but the required preprocessing was very simple so, `MS Excel` was sufficient.
 
 Since the first column contains information about the year and county `FIPS` code, we needed to split up the digits into separate columns. `MS Excel` has a function `MID` which lets you extract a sub-string from a given string. Using that, the first column was split into `FIPS_CD` and `Years` column for all files. 
@@ -23,10 +23,11 @@ The provided shape files contain the county `FIPS` code and the column is named 
 - Clickable counties on the map to get a more granular view
 - Different color schemes to make it more accessible for color-blind users
 - Side by side comparisons of a given state and the entirety of the USA
-- Timeline slider from `1895` to `2022` to let the user select a specific time period.
+- Year slider from `2000` to `2015` to let the user select a specific time period.
+- Month slider to view specific months for a given year.
 
 ### Target Audience
-The target audience for this project are the researchers trying to understand or visualize climate change in the USA over the last 100 years. It also made for the other students in the course as it might be relevant to them as well.
+The target audience for this project are the researchers trying to understand or visualize climate change in the USA between 2000 and 2015. It also made for the other students in the course as it might be relevant to them as well.
 
 ### Multimedia
 - An interactive map is definitely required where we can show temperatures and precipitations over a given time period
@@ -44,6 +45,7 @@ The first map is a generic interactive choropleth map:
     - Minimum Temperature
     - Average Temperature
     - Precipitation
-- This will be centered at 39.8283° N, 98.5795° W
+- This will be centered at `39.8283° N, 98.5795° W`
+- Default zoom level is `4.5`
 
 The second map will be more granular. It will let users compare specific states, years, months, and types of data. The options for which state to compare will be present in a dropdown menu. Since it is a comparison map, it will be centered at the center of the given state.

@@ -120,7 +120,7 @@
 
     <div class="map-overlay top">
       <div class="map-overlay-inner">
-        <h2>Significant earthquakes in 2015</h2>
+        <h2>Select year and month to display the corresponding weather data</h2>
         <label id="year">2000</label>
         <input
           class="slider"
@@ -144,12 +144,6 @@
           onchange="updateSliderMonth(this.value)"
         />
       </div>
-      <!-- <div class="map-overlay-inner">
-        <div id="legend" class="legend">
-          <div class="bar"></div>
-          <div>Magnitude (m)</div>
-        </div>
-      </div> -->
     </div>
 
     <div id="legend"></div>
@@ -242,15 +236,18 @@
         // When a click event occurs on a feature in the states layer,
         // open a popup at the location of the click, with description
         // HTML from the click event's properties.
-        map.on("click", "states-layer", (e) => {
+        map.on("click", "avg-temp-layer", (e) => {
           new mapboxgl.Popup()
             .setLngLat(e.lngLat)
             .setHTML(
               "State: " +
-                e.features[0].properties.STATE +
+                e.features[0].properties.state +
                 "\n" +
                 "County: " +
-                e.features[0].properties.NAME
+                e.features[0].properties.name +
+                "\n" +
+                "Temperature: " +
+                e.features[0].properties[temp] + "F"
             )
             .addTo(map);
         });
@@ -301,7 +298,6 @@
               "#fe0000",
             ]);
 
-        console.log(temp);
       }
     </script>
   </body>
