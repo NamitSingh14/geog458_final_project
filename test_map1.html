@@ -122,9 +122,27 @@
       <div class="map-overlay-inner">
         <h2>Significant earthquakes in 2015</h2>
         <label id="year">2000</label>
-        <input class="slider" id="slider year" type="range" min="0" max="15" step="1" value="0" onchange="updateSliderYear(this.value)"/>
+        <input
+          class="slider"
+          id="slider year"
+          type="range"
+          min="0"
+          max="15"
+          step="1"
+          value="0"
+          onchange="updateSliderYear(this.value)"
+        />
         <label id="month">January</label>
-        <input class="slider" id="slider month" type="range" min="0" max="11" step="1" value="0" onchange="updateSliderMonth(this.value)"/>
+        <input
+          class="slider"
+          id="slider month"
+          type="range"
+          min="0"
+          max="11"
+          step="1"
+          value="0"
+          onchange="updateSliderMonth(this.value)"
+        />
       </div>
       <!-- <div class="map-overlay-inner">
         <div id="legend" class="legend">
@@ -149,26 +167,31 @@
 
       const years = [
         2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011,
-        2012, 2013, 2014, 2015
+        2012, 2013, 2014, 2015,
       ];
 
       const months = [
-        'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'
+        "january",
+        "february",
+        "march",
+        "april",
+        "may",
+        "june",
+        "july",
+        "august",
+        "september",
+        "october",
+        "november",
+        "december",
       ];
 
       let temp = "january";
-
 
       function updateSliderYear(slideAmount) {
         var sliderDiv = document.getElementById("year");
         const filters = ["==", "year", years[slideAmount]];
         map.setFilter("avg-temp-layer", filters);
         sliderDiv.innerHTML = years[slideAmount];
-      }
-      function updateSliderMonth(slideAmount) {
-        var sliderDiv = document.getElementById("month");
-        sliderDiv.innerHTML = months[slideAmount].charAt(0).toUpperCase() + months[slideAmount].substring(1);
-        temp = months[slideAmount];
       }
 
       //load data to the map as new layers.
@@ -239,7 +262,35 @@
         });
       });
 
+      function updateSliderMonth(slideAmount) {
+        var sliderDiv = document.getElementById("month");
+        sliderDiv.innerHTML =
+          months[slideAmount].charAt(0).toUpperCase() +
+          months[slideAmount].substring(1);
+        temp = months[slideAmount];
 
+        map.setPaintProperty('avg-temp-layer', 'fill-color', [
+              "step",
+              ["get", temp],
+              "#FFEDA0",
+              10,
+              "#FED976",
+              20,
+              "#FEB24C",
+              30,
+              "#FD8D3C",
+              40,
+              "#FC4E2A",
+              50,
+              "#E31A1C",
+              60,
+              "#BD0026",
+              70,
+              "#800026",
+            ]);
+
+        console.log(temp);
+      }
     </script>
   </body>
 </html>
