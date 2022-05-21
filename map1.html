@@ -15,108 +15,17 @@
       href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css"
       rel="stylesheet"
     />
-    <!-- <link rel="stylesheet" href="css/style.css" /> -->
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
-
-      #map {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 100%;
-      }
-
-      /* the layout of the legend panel */
-      #legend {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 110px;
-        background: #fff;
-        margin-right: 20px;
-        margin-bottom: 40px;
-        padding: 10px 20px 10px 10px;
-        border-radius: 3px;
-        text-align: center;
-        font-family: "Open Sans", sans-serif;
-      }
-
-      /* each line for a break */
-      .break {
-        position: relative;
-        margin: 0px;
-        padding: 0px;
-      }
-
-      /* basic style for a dot/circle */
-      .dot {
-        display: inline-block;
-        margin-top: 5px;
-        border-radius: 50%;
-        opacity: 0.6;
-      }
-
-      /* the label for the dot */
-      .dot-label {
-        position: absolute;
-        top: 0;
-        right: 0;
-        font-style: italic;
-      }
-
-      /* the text color of a hyper link */
-      a {
-        color: black;
-      }
-    </style>
+    <link rel="stylesheet" href="css/map1.css">
   </head>
 
   <body>
-    <style>
-      .map-overlay {
-        font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
-        position: absolute;
-        width: 25%;
-        top: 0;
-        left: 0;
-        padding: 10px;
-      }
-
-      .map-overlay .map-overlay-inner {
-        background-color: #fff;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-        border-radius: 3px;
-        padding: 10px;
-        margin-bottom: 10px;
-      }
-
-      .map-overlay h2 {
-        line-height: 24px;
-        display: block;
-        margin: 0 0 10px;
-      }
-
-      .map-overlay .legend .bar {
-        height: 10px;
-        width: 100%;
-        background: linear-gradient(to right, #fca107, #7f3121);
-      }
-
-      .map-overlay input {
-        background-color: transparent;
-        display: inline-block;
-        width: 100%;
-        position: relative;
-        margin: 0;
-        cursor: ew-resize;
-      }
-    </style>
-
     <div id="map"></div>
+    <div class="map-overlay" id="features">
+      <h2>US population density</h2>
+      <div id="pd"><p>Hover over a state!</p></div>
+    </div>
+    <div class="map-overlay" id="legend"></div>
 
     <div class="map-overlay top">
       <div class="map-overlay-inner">
@@ -146,7 +55,6 @@
       </div>
     </div>
 
-    <div id="legend"></div>
     <div id="title">COVID-19 Cases in the USA</div>
     <div id="subtitle">December 31, 2020</div>
     <script>
@@ -247,8 +155,11 @@
                 e.features[0].properties.name +
                 " |\n" +
                 "Temperature: " +
-                e.features[0].properties[temp] + "F"
-                + "/" + ((e.features[0].properties[temp] - 32)/1.8).toFixed(2) + "C"
+                e.features[0].properties[temp] +
+                "F" +
+                "/" +
+                ((e.features[0].properties[temp] - 32) / 1.8).toFixed(2) +
+                "C"
             )
             .addTo(map);
         });
@@ -273,33 +184,73 @@
           months[slideAmount].substring(1);
         temp = months[slideAmount];
 
-        map.setPaintProperty('avg-temp-layer', 'fill-color', [
-              "step",
-              ["get", temp],
-              "#00c0ff",
-              0,
-              "#2bb6ff",
-              10,
-              "#5caaff",
-              20,
-              "#8a9aff",
-              30,
-              "#b585ff",
-              40,
-              "#d96de9",
-              50,
-              "#f64dc9",
-              60,
-              "#ff22a1",
-              70,
-              "#ff0074",
-              80,
-              "#ff0043",
-              90,
-              "#fe0000",
-            ]);
-
+        map.setPaintProperty("avg-temp-layer", "fill-color", [
+          "step",
+          ["get", temp],
+          "#00c0ff",
+          0,
+          "#2bb6ff",
+          10,
+          "#5caaff",
+          20,
+          "#8a9aff",
+          30,
+          "#b585ff",
+          40,
+          "#d96de9",
+          50,
+          "#f64dc9",
+          60,
+          "#ff22a1",
+          70,
+          "#ff0074",
+          80,
+          "#ff0043",
+          90,
+          "#fe0000",
+        ]);
       }
+
+      const layers = [
+        "0-10",
+        "10-20",
+        "20-30",
+        "30-40",
+        "40-50",
+        "50-60",
+        "60-70",
+        "80-90",
+        "90+",
+      ];
+      const colors = [
+        "#00c0ff",
+        "#2bb6ff",
+        "#5caaff",
+        "#8a9aff",
+        "#b585ff",
+        "#d96de9",
+        "#f64dc9",
+        "#ff22a1",
+        "#ff0074",
+        "#ff0043",
+        "#fe0000",
+      ];
+
+      const legend = document.getElementById("legend");
+
+      layers.forEach((layer, i) => {
+        const color = colors[i];
+        const item = document.createElement("div");
+        const key = document.createElement("span");
+        key.className = "legend-key";
+        key.style.backgroundColor = color;
+
+        const value = document.createElement("span");
+        value.innerHTML = `${layer}`;
+        item.appendChild(key);
+        item.appendChild(value);
+        legend.appendChild(item);
+      });
     </script>
   </body>
 </html>

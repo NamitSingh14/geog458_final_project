@@ -39,7 +39,7 @@ For this project, our group wanted to include two pages that allow users to inte
 
 The first map is a generic interactive choropleth map:
  - It will have a time slider to see data from different years
- - Base map will be light monochrome
+ - Base map will be dark monochrome
  - There will be total of 4 layers:
     - Maximum Temperature
     - Minimum Temperature
