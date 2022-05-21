@@ -242,12 +242,13 @@
             .setHTML(
               "State: " +
                 e.features[0].properties.state +
-                "\n" +
-                "County: " +
+                " |\n" +
+                "Climate Division: " +
                 e.features[0].properties.name +
-                "\n" +
+                " |\n" +
                 "Temperature: " +
                 e.features[0].properties[temp] + "F"
+                + "/" + ((e.features[0].properties[temp] - 32)/1.8).toFixed(2) + "C"
             )
             .addTo(map);
         });
