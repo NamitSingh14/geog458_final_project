@@ -123,15 +123,15 @@
         <h2>Significant earthquakes in 2015</h2>
         <label id="year">2000</label>
         <input class="slider" id="slider year" type="range" min="0" max="15" step="1" value="0" onchange="updateSliderYear(this.value)"/>
-        <label id="month">january</label>
+        <label id="month">January</label>
         <input class="slider" id="slider month" type="range" min="0" max="11" step="1" value="0" onchange="updateSliderMonth(this.value)"/>
       </div>
-      <div class="map-overlay-inner">
+      <!-- <div class="map-overlay-inner">
         <div id="legend" class="legend">
           <div class="bar"></div>
           <div>Magnitude (m)</div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div id="legend"></div>
@@ -167,7 +167,7 @@
       }
       function updateSliderMonth(slideAmount) {
         var sliderDiv = document.getElementById("month");
-        sliderDiv.innerHTML = months[slideAmount];
+        sliderDiv.innerHTML = months[slideAmount].charAt(0).toUpperCase() + months[slideAmount].substring(1);
         temp = months[slideAmount];
       }
 
