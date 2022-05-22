@@ -40,6 +40,51 @@
             color: white;
             }
 
+            /* Container for flexboxes */
+            section {
+                display: -webkit-flex;
+                display: flex;
+            }
+
+            /* Style the navigation menu */
+            nav {
+                -webkit-flex: 1;
+                -ms-flex: 1;
+                flex: 1;
+                background: #ccc;
+                padding: 20px;
+            }
+
+            /* Style the list inside the menu */
+                nav ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            /* Style the content */
+            article {
+                -webkit-flex: 3;
+                -ms-flex: 3;
+                flex: 3;
+                background-color: #f1f1f1;
+                padding: 10px;
+            }
+
+            /* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+            @media (max-width: 600px) {
+                section {
+                    -webkit-flex-direction: column;
+                    flex-direction: column;
+                }
+            }
+
+            .firstlist {
+                list-style-type: disc;
+            }
+            .secondlist {
+                list-style-type: square;
+            }
+
             #About {background-color: white;}
             #Map1 {background-color: white;}
             #Map2 {background-color: white;}
@@ -71,7 +116,6 @@
 
 
         <div id="Data" class="tabcontent">
-            <p>yo</p>
             <section>
                 <nav>
                   <ul>
@@ -82,37 +126,59 @@
                     <li><a href="#Section5">Files</a></li>
                   </ul>
                 </nav>
-                
-                <article id="#Section1">
-                  <h1>Data Source</h1>
-                  <p>The data was aggregated by the National Center for Environmental Information. They have hosted the weather data at https://www.ncei.noaa.gov/pub/data/cirs/climdiv/. 
-                    In this repository, they have provided the required shape files for contiguous USA and Alaska separately. Along with those shape files, we have a lot of exhaustive weather related data but we are only using the max, min and average temperatures, and precipitation data from 1895 to 2022.
-                    Each file contains county based data for each month from 1895 to 2022.</p>
-                  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+            </section>
+            <section id="#Section1">
+                <article>
+                    <h1>Data Source</h1>
+                    <p>The data was aggregated by the National Center for Environmental Information. They have hosted the weather data at 
+                       <a href="https://www.ncei.noaa.gov/pub/data/cirs/climdiv/">https://www.ncei.noaa.gov/pub/data/cirs/climdiv</a>. 
+                        In this repository, they have provided the required shape files for contiguous USA and Alaska separately. 
+                        Along with those shape files, we have a lot of exhaustive weather related data but we are only using the max, 
+                        min and average temperatures, and precipitation data from 1895 to 2022. 
+                        Each file contains county based data for each month from 1895 to 2022.
+                    </p>
                 </article>
-
-                <article id="#Section2">
+            </section>
+            <section id="#Section2">
+                <article>
                     <h1>How to Interpret the Original Data</h1>
-                    <p>At first glance, the weather data files look very overwhelming and confusing to read. This is why NCEI’s repository contains a `divisional-readme.txt` file at https://www.ncei.noaa.gov/pub/data/cirs/climdiv/divisional-readme.txt.
-
+                    <p>At first glance, the weather data files look very overwhelming and confusing to read. 
+                        This is why NCEI’s repository contains a <code>divisional-readme.txt</code> file at 
+                        <a href="https://www.ncei.noaa.gov/pub/data/cirs/climdiv/divisional-readme.txt">
+                            https://www.ncei.noaa.gov/pub/data/cirs/climdiv/divisional-readme.txt
+                        </a>.
+                    </p>
+                    <p>
                         To simplify what the readme file contains, the following are the general rules each follows:
-                        
-                        All columns besides the first column are the respective weather readings for each consecutive month. For example: In the climdiv-tmaxdv-v1.0.0-20220406 file, the second column is the max temperature reading for January, third column is for February and so on until December which is the thirteenth column
-                        The first column values are interpreted as follows:
-                        First 4 (1-4) digits are the FIPS codes for counties
-                        Next 2 (5-6) digits are the element code
-                        Last 4 (7-11) digits is the year
-                        Consider 0101271895: 0101 is the FIP code, 27 is the element code, 1895 is the year
-                        
+                        <ol>
+                            <li>All columns besides the first column are the respective weather readings for each consecutive month. 
+                                For example: In the climdiv-tmaxdv-v1.0.0-20220406 file, the second column is the max temperature reading for January, 
+                                third column is for February and so on until December which is the thirteenth column>
+                            
+                            
+                            <li>The first column values are interpreted as follows:
+                                <ul class="firstlist">
+                                    <li>First 4 (1-4) digits are the FIPS codes for counties
+                                    <li>Next 2 (5-6) digits are the element code
+                                    <li>Last 4 (7-11) digits is the year
+                                    <li>0101271895: 0101 is the FIP code, 27 is the element code, 1895 is the year
+                                </ul>
+                        </ol>
+                    </p>
+                    <p>
                         Element Codes:
-                        01 = Precipitation
-                        02 = Average Temperature
-                        27 = Maximum Temperature
-                        28 = Minimum Temperature
+                        <ul class="firstlist">
+                            <li> 01 = Precipitation
+                            <li> 02 = Average Temperature
+                            <li> 27 = Maximum Temperature
+                            <li> 28 = Minimum Temperature 
+                        </ul>
                         Note: These are not all the element codes. Only the ones we are concerned with are provided
                     </p>
                 </article>
-                <article id="#Section3">
+            </section>
+            <section id="#Section3">
+                <article>
                     <h1>Preprocessing</h1>
                     <p>All the data preprocessing was done in MS Excel. This could be done in Python using its Pandas module but the required preprocessing was very simple so, MS Excel was sufficient.
 
@@ -121,13 +187,15 @@
                         
                         The provided shape files contain the county FIPS code and the column is named `FIPS_CD`. This is why in the processed weather data files, the county FIPS code column was also named `FIPS_CD`. </p>
                 </article>
-
-                <article id="#Section4">
+            </section>
+            <section id="#Section4">
+                <article>
                     <h1>Usage (Work in Progress)</h1>
                     <p></p>
                 </article>
-
-                <article id="#Section5">
+            </section>
+            <section id="#Section5">
+                <article>
                     <h1>Files</h1>
                     <p>The original weather data files can be downloaded from https://www.ncei.noaa.gov/pub/data/cirs/climdiv/. 
                         Original shape files: 

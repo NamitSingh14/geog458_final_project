@@ -1,4 +1,4 @@
-function openPage(pageName,elmnt,color) {
+function openPage(pageName,elmnt) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -9,7 +9,6 @@ function openPage(pageName,elmnt,color) {
       tablinks[i].style.backgroundColor = "";
     }
     document.getElementById(pageName).style.display = "block";
-    elmnt.style.backgroundColor = color;
   }
   
   // Get the element with id="defaultOpen" and click on it
