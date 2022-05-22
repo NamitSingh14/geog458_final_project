@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            * {box-sizing: border-box}
+
+            /* Set height of body and the document to 100% */
+            body, html {
+                height: 100%;
+                margin: 0;
+                font-family: Arial;
+            }
+
+            /* Add a black background color to the top navigation */
+            .topnav {
+            background-color: #333;
+            overflow: hidden;
+            }
+
+            /* Style the links inside the navigation bar */
+            .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+            }
+
+            /* Change the color of links on hover */
+            .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+            }
+
+            /* Add a color to the active/current link */
+            .topnav a.active {
+            background-color: #04AA6D;
+            color: white;
+            }
+
+            #About {background-color: white;}
+            #Map1 {background-color: white;}
+            #Map2 {background-color: white;}
+            #Data {background-color: white;}
+        </style>
+    </head>
+    <body>
+        <div class="topnav">
+            <a class="tablink" onclick="openPage('About')" id="defaultOpen">About</a>
+            <a href="map1.html">Map 1</a>
+            <a href="map1.html">Map 2</a>
+            <a class="tablink" onclick="openPage('Data')">Data</a>
+        </div>
+
+        <div id="About" class="tabcontent">
+            <h2>About the project</h2>
+                <p>
+                    Through this project, we will attempt to visualize minimum and maximum temperatures across the counties in the United States, along with the precipitation rate. 
+                    Since the idea is to showcase climate change, the project will have the temperature and precipitation readings from different years.
+                    This project would be intended for the general public, specifically those who have an interest in the chosen location (the U.S). This could also benefit climate change activists and other people trying to study climate change in any location in the USA.
+                </p>
+            <h2>Who are we?</h2>
+                <p>Danell Forbes</p>
+                <p>Joseph Ho</p>
+                <p>Kristina Hsu</p>
+                <p>Namit Singh</p>
+                <p>Saka Davaajav</p>
+        </div>
+
+
+        <div id="Data" class="tabcontent">
+            <p>yo</p>
+            <section>
+                <nav>
+                  <ul>
+                    <li><a href="#Section1">Data Source</a></li>
+                    <li><a href="#Section2">How to Interpret the Original Data</a></li>
+                    <li><a href="#Section3">Preprocessing</a></li>
+                    <li><a href="#Section4">Usage (Work in Progress)</a></li>
+                    <li><a href="#Section5">Files</a></li>
+                  </ul>
+                </nav>
+                
+                <article id="#Section1">
+                  <h1>Data Source</h1>
+                  <p>The data was aggregated by the National Center for Environmental Information. They have hosted the weather data at https://www.ncei.noaa.gov/pub/data/cirs/climdiv/. 
+                    In this repository, they have provided the required shape files for contiguous USA and Alaska separately. Along with those shape files, we have a lot of exhaustive weather related data but we are only using the max, min and average temperatures, and precipitation data from 1895 to 2022.
+                    Each file contains county based data for each month from 1895 to 2022.</p>
+                  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+                </article>
+
+                <article id="#Section2">
+                    <h1>How to Interpret the Original Data</h1>
+                    <p>At first glance, the weather data files look very overwhelming and confusing to read. This is why NCEI’s repository contains a `divisional-readme.txt` file at https://www.ncei.noaa.gov/pub/data/cirs/climdiv/divisional-readme.txt.
+
+                        To simplify what the readme file contains, the following are the general rules each follows:
+                        
+                        All columns besides the first column are the respective weather readings for each consecutive month. For example: In the climdiv-tmaxdv-v1.0.0-20220406 file, the second column is the max temperature reading for January, third column is for February and so on until December which is the thirteenth column
+                        The first column values are interpreted as follows:
+                        First 4 (1-4) digits are the FIPS codes for counties
+                        Next 2 (5-6) digits are the element code
+                        Last 4 (7-11) digits is the year
+                        Consider 0101271895: 0101 is the FIP code, 27 is the element code, 1895 is the year
+                        
+                        Element Codes:
+                        01 = Precipitation
+                        02 = Average Temperature
+                        27 = Maximum Temperature
+                        28 = Minimum Temperature
+                        Note: These are not all the element codes. Only the ones we are concerned with are provided
+                    </p>
+                </article>
+                <article id="#Section3">
+                    <h1>Preprocessing</h1>
+                    <p>All the data preprocessing was done in MS Excel. This could be done in Python using its Pandas module but the required preprocessing was very simple so, MS Excel was sufficient.
+
+                        Since the first column contains information about the year and county FIPS code, we needed to split up the digits into separate columns. MS Excel has a function `MID` which lets you extract a sub-string from a given string. Using that, the first column was split into `FIPS_CD` and `Years` column for all files. 
+                        Then columns for the months were created by entering `January` for the third column header and letting MS Excel autofill the rest of the months.
+                        
+                        The provided shape files contain the county FIPS code and the column is named `FIPS_CD`. This is why in the processed weather data files, the county FIPS code column was also named `FIPS_CD`. </p>
+                </article>
+
+                <article id="#Section4">
+                    <h1>Usage (Work in Progress)</h1>
+                    <p></p>
+                </article>
+
+                <article id="#Section5">
+                    <h1>Files</h1>
+                    <p>The original weather data files can be downloaded from https://www.ncei.noaa.gov/pub/data/cirs/climdiv/. 
+                        Original shape files: 
+                        Contiguous US: https://www.ncei.noaa.gov/pub/data/cirs/climdiv/CONUS_CLIMATE_DIVISIONS.shp.zip
+                        Alaska: https://www.ncei.noaa.gov/pub/data/cirs/climdiv/AK_climate_divisions.zip
+                        
+                        Processed data files:
+                        Average Temeprature
+                        Maximum Temperature
+                        Minimum Temperature
+                        Precipitation
+                    </p>
+                </article>
+            </section>
+        </div>
+
+        <script src="js/scripts.js"></script>
+    </body>
+</html> 
