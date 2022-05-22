@@ -1,5 +1,8 @@
 # Climate Change in the USA between 2000 and 2015
 
+### Link to maps
+[Map 1](map1.html)
+
 ### Project Idea
 The project idea is to visualize minimum and maximum temperatures across the counties in the United States, along with the precipitation. Since the idea is to showcase climate change, the project will have the temperature and precipitation readings from different years.
 
