@@ -91,7 +91,7 @@ article {
   line-height: 48px;
 }
 
-.data-divider {
+.divider {
   width: 95%;
   height: 4px;
   background: #85754d;
@@ -112,8 +112,9 @@ article {
 
 .data-text {
   padding: 20px;
-
+  width: 95%;
   background: #e8e3d3;
+  padding-left: 25px;
 }
 
 #data {
