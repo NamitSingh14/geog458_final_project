@@ -7,39 +7,39 @@ body,
 html {
   height: 100%;
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   transition-duration: 500ms;
 }
 
 /* Container for flexboxes */
 section {
-    display: -webkit-flex;
-    display: flex;
-  }
-  
-  /* Style the navigation menu */
-  nav {
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    background: #ccc;
-    padding: 20px;
-  }
-  
-  /* Style the list inside the menu */
-  nav ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  /* Style the content */
-  article {
-    -webkit-flex: 3;
-    -ms-flex: 3;
-    flex: 3;
-    background-color: #f1f1f1;
-    padding: 10px;
-  }
+  display: -webkit-flex;
+  display: flex;
+}
+
+/* Style the navigation menu */
+nav {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  background: #ccc;
+  padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Style the content */
+article {
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  background-color: #f1f1f1;
+  padding: 10px;
+}
 
 /* Add a black background color to the top navigation */
 .topnav {
@@ -50,7 +50,6 @@ section {
   width: 100%;
   top: 0;
   z-index: 100;
-  margin-bottom: 10px;
 }
 
 /* Style the links inside the navigation bar */
@@ -80,29 +79,61 @@ section {
   padding: 14px 16px;
 }
 
-.data-list-item {
-    margin-top: 10px;
+.data-list {
+  list-style: none;
+  padding: 0;
 }
 
+.data-heading {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 48px;
+}
 
+.data-divider {
+  width: 95%;
+  height: 4px;
+  background: #85754d;
+}
+
+.data-list-item {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  margin-top: 12px;
+
+  display: flex;
+  align-items: center;
+
+  color: #3391ff;
+}
+
+.data-text {
+  padding: 20px;
+
+  background: #e8e3d3;
+}
 
 #data {
   display: grid;
   grid-template-columns: 0.6fr 1.4fr;
   grid-template-rows: 100%;
-  background-color: #2196F3;
+  background-color: #2196f3;
   gap: 0px 0px;
 }
 
 #data-nav {
-    grid-column: 1;
-    grid-row: 1;
-    background: #ccc;
+  grid-column: 1;
+  grid-row: 1;
+  background: #e8e3d3;
+  padding-left: 30px;
 }
 
 #data-content {
-    grid-column: 2;
-    grid-row: 1;
+  grid-column: 2;
+  grid-row: 1;
 }
 
 /* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */

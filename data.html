@@ -3,7 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/data.css" />
 </head>
 
 <body>
@@ -16,9 +16,11 @@
 
     <div id="data">
         <div id="data-nav">
-            <ul>
+            <h1 class="data-heading">Table of Contents</h1>
+            <div class="data-divider"></div>
+            <ul class="data-list">
                 <li class="data-list-item"><a href="#data-source">Data Source</a></li>
-                <li class="data-list-item"><a href="#data-interpret">How to Interpret the Original Data</a></li>
+                <li class="data-list-item"><a href="#data-interpret">Data Interpretation</a></li>
                 <li class="data-list-item"><a href="#data-preprocessing">Preprocessing</a></li>
                 <li class="data-list-item"><a href="#files">Files</a></li>
             </ul>
@@ -26,8 +28,9 @@
         <div id="data-content">
             <section id="#data-source">
                 <article>
-                    <h1>Data Source</h1>
-                    <p>
+                    <h1 class="data-heading">Data Source</h1>
+                    <div class="data-divider"></div>
+                    <p class="data-text">
                         We are using the data from the National Centers for Environmental Information. The particular
                         data that interested us is the temperature and precipitation and will be obtained from
                         <a href="https://www.ncei.noaa.gov/pub/data/cirs/climgrid/">NCEI's data repository</a>. In
@@ -41,14 +44,15 @@
             </section>
             <section id="#data-interpret">
                 <article>
-                    <h1>How to Interpret the Original Data</h1>
-                    <p>At first glance, the weather data files look very overwhelming and confusing to read.
+                    <h1 class="data-heading">Data Interpretation</h1>
+                    <div class="data-divider"></div>
+                    <p class="data-text">At first glance, the weather data files look very overwhelming and confusing to read.
                         This is why NCEI’s repository contains a <code>divisional-readme.txt</code> file at
                         <a href="https://www.ncei.noaa.gov/pub/data/cirs/climdiv/divisional-readme.txt">
                             https://www.ncei.noaa.gov/pub/data/cirs/climdiv/divisional-readme.txt
                         </a>.
                     </p>
-                    <p>
+                    <p class="data-text">
                         To simplify what the readme file contains, the following are the general rules each follows:
                     <ol>
                         <li>All columns besides the first column are the respective weather readings for each
@@ -67,7 +71,7 @@
                             </ul>
                     </ol>
                     </p>
-                    <p>
+                    <p class="data-text">
                         Element Codes:
                     <ul class="firstlist">
                         <li> 01 = Precipitation
@@ -81,8 +85,9 @@
             </section>
             <section id="#data-preprocessing">
                 <article>
-                    <h1>Preprocessing</h1>
-                    <p>All the data preprocessing was done in MS Excel. This could be done in Python using its Pandas
+                    <h1 class="data-heading">Preprocessing</h1>
+                    <div class="data-divider"></div>
+                    <p class="data-text">All the data preprocessing was done in MS Excel. This could be done in Python using its Pandas
                         module but the required preprocessing was very simple so, MS Excel was sufficient.
 
                         <br>
@@ -113,8 +118,9 @@
             </section>
             <section id="#files">
                 <article>
-                    <h1>Files</h1>
-                    <p>The original weather data files can be downloaded from
+                    <h1 class="data-heading">Files</h1>
+                    <div class="data-divider"></div>
+                    <p class="data-text">The original weather data files can be downloaded from
                         https://www.ncei.noaa.gov/pub/data/cirs/climdiv/.
                         <br>
                         <br>

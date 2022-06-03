@@ -1,0 +1,133 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Set height of body and the document to 100% */
+body,
+html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  transition-duration: 500ms;
+}
+
+/* Container for flexboxes */
+section {
+    display: -webkit-flex;
+    display: flex;
+  }
+  
+  /* Style the navigation menu */
+  nav {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    background: #ccc;
+    padding: 20px;
+  }
+  
+  /* Style the list inside the menu */
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  /* Style the content */
+  article {
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+    background-color: #f1f1f1;
+    padding: 10px;
+  }
+
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #4b2e83;
+  overflow: hidden;
+  position: sticky;
+  position: -webkit-sticky;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  transition-duration: 500ms;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #04aa6d;
+  color: white;
+}
+
+.tabcontent {
+  padding: 14px 16px;
+}
+
+.data-list-item {
+    margin-top: 10px;
+}
+
+
+
+#data {
+  display: grid;
+  grid-template-columns: 0.3fr 1.7fr;
+  grid-template-rows: 100%;
+  background-color: #2196F3;
+  gap: 0px 0px;
+}
+
+#data-nav {
+    grid-column: 1;
+    grid-row: 1;
+    background: #ccc;
+}
+
+#data-content {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  section {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+.firstlist {
+  list-style-type: disc;
+}
+.secondlist {
+  list-style-type: square;
+}
+
+#About {
+  background-color: white;
+}
+#Map1 {
+  background-color: white;
+}
+#Map2 {
+  background-color: white;
+}
+#data {
+  background-color: white;
+}
