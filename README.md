@@ -25,7 +25,6 @@ The provided shape files contain the county `FIPS` code and the column is named 
 ### Primary Functions
 - Clickable counties on the map to get a more granular view
 - Different color schemes to make it more accessible for color-blind users
-- Side by side comparisons of a given state and the entirety of the USA
 - Year slider from `2000` to `2015` to let the user select a specific time period.
 - Month slider to view specific months for a given year.
 

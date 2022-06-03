@@ -4,17 +4,22 @@ body {
   padding: 0;
 }
 
+#map-wrapper {
+  padding-top: 10px;
+}
+
 #map {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 100%;
 }
+
 #features {
     position: absolute;
   top: 0;
   right: 0;
-  margin-top: 20px;
+  margin-top: 60px;
   margin-right: 20px;
   width: 250px;
   background-color: white;
@@ -87,6 +92,7 @@ a {
   border-radius: 3px;
   padding: 10px;
   margin-bottom: 10px;
+  margin-top: 60px;
 }
 
 .map-overlay h2 {

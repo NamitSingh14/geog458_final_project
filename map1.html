@@ -17,46 +17,58 @@
     />
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
     <link rel="stylesheet" href="css/map1.css" />
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
 
   <body>
-    <div id="map"></div>
+    <div class="topnav">
+      <a href="index.html">Home</a>
+      <a href="map1.html">Average Temperature Map</a>
+      <a href="map1.html">Map 2</a>
+      <a href="data.html">Data</a>
+    </div>
 
-    <div class="map-overlay top">
-      <div class="map-overlay-inner">
-        <h2>Select year and month to display the corresponding weather data</h2>
-        <label id="year">2000</label>
-        <input
-          class="slider"
-          id="slider year"
-          type="range"
-          min="0"
-          max="15"
-          step="1"
-          value="0"
-          onchange="updateSliderYear(this.value)"
-        />
-        <label id="month">January</label>
-        <input
-          class="slider"
-          id="slider month"
-          type="range"
-          min="0"
-          max="11"
-          step="1"
-          value="0"
-          onchange="updateSliderMonth(this.value)"
-        />
+    <div id="map-wrapper">
+      <div id="map"></div>
+
+      <div class="map-overlay top">
+        <div class="map-overlay-inner">
+          <h2>
+            Select year and month to display the corresponding weather data
+          </h2>
+          <label id="year">2000</label>
+          <input
+            class="slider"
+            id="slider year"
+            type="range"
+            min="0"
+            max="15"
+            step="1"
+            value="0"
+            onchange="updateSliderYear(this.value)"
+          />
+          <label id="month">January</label>
+          <input
+            class="slider"
+            id="slider month"
+            type="range"
+            min="0"
+            max="11"
+            step="1"
+            value="0"
+            onchange="updateSliderMonth(this.value)"
+          />
+        </div>
       </div>
-    </div>
-    <div id="features">
-      <h2>Climate Division Details</h2>
-      <div id="pd"><p>Hover over a division!</p></div>
-    </div>
-    <div id="legend">Legend</div>
+      <div id="features">
+        <h2>Climate Division Details</h2>
+        <div id="pd"><p>Hover over a division!</p></div>
+      </div>
+      <div id="legend">Legend</div>
 
-    <div id="title">Weather information in the contiguous USA</div>
-    <div id="subtitle">May 21, 2022</div>
+      <div id="title">Weather information in the contiguous USA</div>
+      <div id="subtitle">May 21, 2022</div>
+    </div>
     <script>
       mapboxgl.accessToken =
         "pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw";
@@ -147,8 +159,13 @@
           });
           document.getElementById("pd").innerHTML = states.length
             ? `<h3>State: ${states[0].properties.state}</h3>
-            <p><strong><em>Division: ${states[0].properties.name}</strong></em></p>
-            Temperature: ${states[0].properties[temp]}F / ${((states[0].properties[temp] - 32) / 1.8).toFixed(2)}C`
+            <p><strong><em>Division: ${
+              states[0].properties.name
+            }</strong></em></p>
+            Temperature: ${states[0].properties[temp]}F / ${(
+                (states[0].properties[temp] - 32) /
+                1.8
+              ).toFixed(2)}C`
             : `<p>Hover over a division!</p>`;
         });
       });
@@ -189,14 +206,14 @@
 
       const layers = [
         "0-10",
-        "10-20",
-        "20-30",
-        "30-40",
-        "40-50",
-        "50-60",
-        "60-70",
-        "80-90",
-        "90+",
+        "11-20",
+        "21-30",
+        "31-40",
+        "41-50",
+        "51-60",
+        "61-70",
+        "81-90",
+        "91+",
       ];
       const colors = [
         "#00c0ff",
