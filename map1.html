@@ -118,27 +118,31 @@
           "fill-color": [
             "step",
             ["get", temp],
-            "#00c0ff",
+            "#00eaff",
+            -10,
+            "#00e6e7",
             0,
-            "#2bb6ff",
+            "#00e0c8",
             10,
-            "#5caaff",
+            "#00d9a6",
             20,
-            "#8a9aff",
+            "#2ed080",
             30,
-            "#b585ff",
+            "#58c658",
             40,
-            "#d96de9",
+            "#77bb2b",
             50,
-            "#f64dc9",
+            "#91ad00",
             60,
-            "#ff22a1",
+            "#ab9d00",
             70,
-            "#ff0074",
+            "#c38a00",
             80,
-            "#ff0043",
+            "#da7100",
             90,
-            "#fe0000",
+            "#ee5000",
+            100,
+            "#ff0000",
           ],
           "fill-outline-color": "#BBBBBB",
           "fill-opacity": 0.7,
@@ -171,53 +175,62 @@
       map.setPaintProperty("data-layer", "fill-color", [
         "step",
         ["get", temp],
-        "#00c0ff",
+        "#00eaff",
+        -10,
+        "#00e6e7",
         0,
-        "#2bb6ff",
+        "#00e0c8",
         10,
-        "#5caaff",
+        "#00d9a6",
         20,
-        "#8a9aff",
+        "#2ed080",
         30,
-        "#b585ff",
+        "#58c658",
         40,
-        "#d96de9",
+        "#77bb2b",
         50,
-        "#f64dc9",
+        "#91ad00",
         60,
-        "#ff22a1",
+        "#ab9d00",
         70,
-        "#ff0074",
+        "#c38a00",
         80,
-        "#ff0043",
+        "#da7100",
         90,
-        "#fe0000",
+        "#ee5000",
+        100,
+        "#ff0000",
       ]);
     }
 
     const layers = [
-      "0-10",
+      "-10-0",
+      "1-10",
       "11-20",
       "21-30",
       "31-40",
       "41-50",
       "51-60",
       "61-70",
+      "71-80",
       "81-90",
-      "91+",
+      "91-100",
+      "101+"
     ];
     const colors = [
-      "#00c0ff",
-      "#2bb6ff",
-      "#5caaff",
-      "#8a9aff",
-      "#b585ff",
-      "#d96de9",
-      "#f64dc9",
-      "#ff22a1",
-      "#ff0074",
-      "#ff0043",
-      "#fe0000",
+      "#00eaff",
+      "#00e6e7",
+      "#00e0c8",
+      "#00d9a6",
+      "#2ed080",
+      "#58c658",
+      "#77bb2b",
+      "#91ad00",
+      "#ab9d00",
+      "#c38a00",
+      "#da7100",
+      "#ee5000",
+      "#ff0000"
     ];
 
     const legend = document.getElementById("legend");
@@ -238,16 +251,14 @@
 
     const layerList = document.getElementById("menu");
     const inputs = layerList.getElementsByTagName("input");
-    
+
     for (const input of inputs) {
       input.onclick = (layer) => {
         const geojsonSource = map.getSource('states');
-        console.log(layer);
         const layerId = layer.target.id;
 
         switch (layerId) {
           case "avg-temp":
-            console.log(geojsonSource);
             geojsonSource.setData("assets/json/avg_temp_poly.geojson");
             break;
 
