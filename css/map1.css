@@ -2,6 +2,7 @@ body {
   font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
+  color: white;
 }
 
 #map-wrapper {
@@ -17,7 +18,7 @@ body {
 
 #menu {
   position: absolute;
-  background: white;
+  background: #34333296;
   border-radius: 3px;
   font-size: medium;
   padding: 10px;
@@ -34,7 +35,7 @@ body {
   margin-top: 60px;
   margin-right: 20px;
   width: 250px;
-  background-color: white;
+  background-color: #34333296;
   border-radius: 3px;
   padding: 10px;
 }
@@ -49,7 +50,7 @@ body {
   line-height: 18px;
   margin-bottom: 40px;
   margin-right: 20px;
-  background-color: white;
+  background-color: #34333296;
   border-radius: 3px;
   padding: 15px;
   font-size: medium;
@@ -101,7 +102,7 @@ a {
 }
 
 .map-overlay .map-overlay-inner {
-  background-color: #fff;
+  background-color: #34333296;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
   padding: 10px;
