@@ -15,8 +15,7 @@
 <body>
   <div class="topnav">
     <a href="index.html">Home</a>
-    <a href="map1.html">Average Temperature Map</a>
-    <a href="map1.html">Map 2</a>
+    <a href="map1.html">Weather Data Map</a>
     <a href="data.html">Data</a>
   </div>
 
@@ -203,7 +202,21 @@
       ]);
     }
 
-    const layers = [
+    const precipitationLegend = [
+      "0-1",
+      "2-3",
+      "3-4",
+      "4-5",
+      "5-6",
+      "6-7",
+      "8-9",
+      "9-10",
+      "11-12",
+      "13-14",
+      "14+",
+    ];
+
+    const tempLegend = [
       "-10-0",
       "1-10",
       "11-20",
@@ -217,6 +230,9 @@
       "91-100",
       "101+"
     ];
+
+    var layers = tempLegend;
+
     const colors = [
       "#00eaff",
       "#00e6e7",
@@ -235,19 +251,99 @@
 
     const legend = document.getElementById("legend");
 
-    layers.forEach((layer, i) => {
-      const color = colors[i];
-      const item = document.createElement("div");
-      const key = document.createElement("span");
-      key.className = "legend-key";
-      key.style.backgroundColor = color;
+    function createLegend(legendLayer, dataType) {
 
-      const value = document.createElement("span");
-      value.innerHTML = `${layer}`;
-      item.appendChild(key);
-      item.appendChild(value);
-      legend.appendChild(item);
-    });
+      while (legend.firstChild) {
+        legend.removeChild(legend.firstChild);
+      };
+
+      if (dataType == "temp") {
+        legend.innerHTML = "Legend (in Fahrenheit)"
+      } else {
+        legend.innerHTML = "Legend (in Inches)"
+      };
+
+
+      layers.forEach((layer, i) => {
+        const color = colors[i];
+        const item = document.createElement("div");
+        const key = document.createElement("span");
+        key.className = "legend-key";
+        key.style.backgroundColor = color;
+
+        const value = document.createElement("span");
+        value.innerHTML = `${layer}`;
+        item.appendChild(key);
+        item.appendChild(value);
+        legend.appendChild(item);
+      });
+    };
+
+    function setIntervals(dataType) {
+      if (dataType == "temp") {
+        map.setPaintProperty("data-layer", "fill-color", [
+          "step",
+          ["get", temp],
+          "#00eaff",
+          -10,
+          "#00e6e7",
+          0,
+          "#00e0c8",
+          10,
+          "#00d9a6",
+          20,
+          "#2ed080",
+          30,
+          "#58c658",
+          40,
+          "#77bb2b",
+          50,
+          "#91ad00",
+          60,
+          "#ab9d00",
+          70,
+          "#c38a00",
+          80,
+          "#da7100",
+          90,
+          "#ee5000",
+          100,
+          "#ff0000",
+        ]);
+      } else {
+        map.setPaintProperty("data-layer", "fill-color", [
+          "step",
+          ["get", temp],
+          "#00eaff",
+          0,
+          "#00e6e7",
+          1,
+          "#00e0c8",
+          2,
+          "#00d9a6",
+          3,
+          "#2ed080",
+          4,
+          "#58c658",
+          5,
+          "#77bb2b",
+          6,
+          "#91ad00",
+          7,
+          "#ab9d00",
+          8,
+          "#c38a00",
+          9,
+          "#da7100",
+          10,
+          "#ee5000",
+          11,
+          "#ff0000",
+        ]);
+      }
+    }
+
+    createLegend(layers, "temp");
 
     const layerList = document.getElementById("menu");
     const inputs = layerList.getElementsByTagName("input");
@@ -260,18 +356,30 @@
         switch (layerId) {
           case "avg-temp":
             geojsonSource.setData("assets/json/avg_temp_poly.geojson");
+            layers = tempLegend
+            createLegend(layers, "temp");
+            setIntervals("temp");
             break;
 
           case "min-temp":
             geojsonSource.setData("assets/json/min_temp_poly.geojson");
+            layers = tempLegend
+            createLegend(layers, "temp");
+            setIntervals("temp");
             break;
 
           case "max-temp":
             geojsonSource.setData("assets/json/max_temp_poly.geojson");
+            layers = tempLegend
+            createLegend(layers, "temp");
+            setIntervals("temp");
             break;
 
           case "precipitation":
             geojsonSource.setData("assets/json/precipitation_poly.geojson");
+            layers = precipitationLegend
+            createLegend(layers, "precipitation");
+            setIntervals("precipitation");
             break;
 
           default:
