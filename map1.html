@@ -171,35 +171,74 @@
         months[slideAmount].substring(1);
       temp = months[slideAmount];
 
-      map.setPaintProperty("data-layer", "fill-color", [
-        "step",
-        ["get", temp],
-        "#00eaff",
-        -10,
-        "#00e6e7",
-        0,
-        "#00e0c8",
-        10,
-        "#00d9a6",
-        20,
-        "#2ed080",
-        30,
-        "#58c658",
-        40,
-        "#77bb2b",
-        50,
-        "#91ad00",
-        60,
-        "#ab9d00",
-        70,
-        "#c38a00",
-        80,
-        "#da7100",
-        90,
-        "#ee5000",
-        100,
-        "#ff0000",
-      ]);
+      var dataFile = map.getSource("states")["_data"];
+
+      console.log(dataFile);
+
+      if (dataFile == "assets/json/precipitation_poly.geojson") {
+        map.setPaintProperty("data-layer", "fill-color", [
+          "step",
+          ["get", temp],
+          "#00eaff",
+          0,
+          "#00e6e7",
+          1,
+          "#00e0c8",
+          2,
+          "#00d9a6",
+          3,
+          "#2ed080",
+          4,
+          "#58c658",
+          5,
+          "#77bb2b",
+          6,
+          "#91ad00",
+          7,
+          "#ab9d00",
+          8,
+          "#c38a00",
+          9,
+          "#da7100",
+          10,
+          "#ee5000",
+          11,
+          "#ff0000",
+        ]);
+
+      } else {
+        map.setPaintProperty("data-layer", "fill-color", [
+          "step",
+          ["get", temp],
+          "#00eaff",
+          -10,
+          "#00e6e7",
+          0,
+          "#00e0c8",
+          10,
+          "#00d9a6",
+          20,
+          "#2ed080",
+          30,
+          "#58c658",
+          40,
+          "#77bb2b",
+          50,
+          "#91ad00",
+          60,
+          "#ab9d00",
+          70,
+          "#c38a00",
+          80,
+          "#da7100",
+          90,
+          "#ee5000",
+          100,
+          "#ff0000",
+        ]);
+      }
+
+
     }
 
     const precipitationLegend = [
